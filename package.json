@@ -1,28 +1,14 @@
 {
-  "name": "playwright-conduit",
+  "name": "conduit-e2e-playwright",
   "version": "1.0.0",
   "private": true,
   "description": "Projeto de automação de testes end-to-end da aplicação Conduit utilizando Playwright e TypeScript.",
-  "homepage": "https://github.com/gabrielam0ura/playwright-conduit#readme",
-  "bugs": {
-    "url": "https://github.com/gabrielam0ura/playwright-conduit/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gabrielam0ura/playwright-conduit.git"
-  },
   "license": "MIT",
-  "workspaces": [
-    "backend",
-    "frontend"
-  ],
   "scripts": {
     "dev": "concurrently --names \"Node,Vite\" -c \"green,blue\" \"npm run dev -w backend\" \"npm run dev -w frontend\"",
     "start": "npm run build -w frontend && npm run start -w backend",
     "test": "playwright test",
     "test:e2e": "playwright test",
-    "test:chromium": "playwright test --project=chromium",
-    "test:firefox": "playwright test --project=firefox",
     "test:headed": "playwright test --headed",
     "test:ui": "playwright test --ui",
     "test:debug": "playwright test --debug",
@@ -30,6 +16,10 @@
     "test:unit": "vitest",
     "typecheck": "tsc --noEmit"
   },
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
   "devDependencies": {
     "@playwright/test": "^1.60.0",
     "@types/node": "^25.9.1",
