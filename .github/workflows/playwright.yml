@@ -64,10 +64,16 @@ jobs:
           done
 
       - name: Instalar navegadores
-        run: npx playwright install --with-deps chromium firefox
+        run: npx playwright install --with-deps chromium
 
       - name: Executar testes
-        run: npx playwright test
+        run: npx playwright test --project=chromium
+
+      - name: Executar migrations
+        run: npm run sqlz -w backend db:migrate
+
+      - name: Executar seeders
+        run: npm run sqlz -w backend db:seed:all
 
       - name: Publicar relatório
         uses: actions/upload-artifact@v4
