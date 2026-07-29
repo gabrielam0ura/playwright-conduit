@@ -19,9 +19,21 @@ export async function submitRegister(page: Page, user: TestUser) {
 }
 
 export async function registerUser(page: Page, user: TestUser) {
-    await submitRegister(page, user);
+  const responsePromise = page.waitForResponse(
+    (response) =>
+      response.request().method() === 'POST' &&
+      response.url().includes('/users')
+  );
 
-    await expect(page.locator(".navbar")).toContainText(user.username);
+  await submitRegister(page, user);
+
+  const response = await responsePromise;
+
+  console.log('Status:', response.status());
+  console.log('URL:', response.url());
+  console.log('Body:', await response.text());
+
+  await expect(page.locator('.navbar')).toContainText(user.username);
 }
 
 export async function login(page: Page, email: string, password: string) {
