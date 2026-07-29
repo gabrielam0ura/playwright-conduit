@@ -69,9 +69,6 @@ jobs:
       - name: Executar migrations
         run: npm run sqlz -w backend db:migrate
 
-      - name: Executar seeders
-        run: npm run sqlz -w backend db:seed:all
-
       - name: Executar testes
         run: npx playwright test --project=chromium
 
